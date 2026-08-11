@@ -51,8 +51,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${poppins.variable} ${sora.variable} h-full antialiased scroll-smooth`}>
-      <body className="min-h-full bg-[#0B1120] text-slate-100 flex flex-col font-sans selection:bg-blue-500/30 selection:text-blue-200">
+    <html lang="en" suppressHydrationWarning className={`${poppins.variable} ${sora.variable} h-full antialiased scroll-smooth`}>
+      <body suppressHydrationWarning className="min-h-full bg-[#0B1120] text-slate-100 flex flex-col font-sans selection:bg-blue-500/30 selection:text-blue-200">
         <LenisProvider>
           <ScrollProgress />
           <CustomCursor />

@@ -14,6 +14,7 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  devIndicators: false,
   basePath: isProd ? "/portfolio" : "",
   assetPrefix: isProd ? "/portfolio/" : "",
 };
