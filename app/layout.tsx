@@ -53,11 +53,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning className={`${poppins.variable} ${sora.variable} h-full antialiased scroll-smooth`}>
+    <html lang="en" suppressHydrationWarning className={`${poppins.variable} ${sora.variable} antialiased scroll-smooth`}>
       <head>
         <link rel="preload" as="image" href={getImagePath("/profile.jpeg")} />
       </head>
-      <body suppressHydrationWarning className="min-h-full bg-[#0B1120] text-slate-100 flex flex-col font-sans selection:bg-blue-500/30 selection:text-blue-200">
+      <body suppressHydrationWarning className="min-h-screen bg-[#0B1120] text-slate-100 flex flex-col font-sans selection:bg-blue-500/30 selection:text-blue-200 overflow-x-hidden overflow-y-auto">
         <LenisProvider>
           <ScrollProgress />
           <CustomCursor />
