@@ -7,6 +7,7 @@ import {
 } from "lucide-react";
 import { FaGithub, FaGooglePlay, FaApple } from "react-icons/fa";
 import { useState } from "react";
+import { getImagePath } from "@/lib/utils";
 
 interface ProjectModalProps {
   project: Project | null;
@@ -53,7 +54,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
           <div className="p-6 overflow-y-auto space-y-6">
             {/* Screenshot */}
             <div className="relative h-64 sm:h-80 rounded-2xl overflow-hidden bg-[#111827] border border-white/10">
-              <img src={screenshots[activeImageIndex]} alt={project.title} className="w-full h-full object-cover" />
+              <img src={getImagePath(screenshots[activeImageIndex])} alt={project.title} className="w-full h-full object-cover" />
               {screenshots.length > 1 && (
                 <>
                   <button onClick={() => setActiveImageIndex((p) => (p - 1 + screenshots.length) % screenshots.length)}

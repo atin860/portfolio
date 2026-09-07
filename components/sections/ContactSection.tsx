@@ -4,10 +4,11 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import confetti from "canvas-confetti";
 import Image from "next/image";
+import { getImagePath } from "@/lib/utils";
 import {
   Mail, Phone, MapPin, Send, CheckCircle2, Sparkles, ExternalLink,
 } from "lucide-react";
-import { FaGithub, FaLinkedin } from "react-icons/fa";
+import { FaGithub, FaLinkedin, FaWhatsapp } from "react-icons/fa";
 
 interface ContactSectionProps {
   prefilledSubject?: string;
@@ -17,17 +18,56 @@ export default function ContactSection({ prefilledSubject = "" }: ContactSection
   const [formData, setFormData] = useState({ name: "", email: "", subject: prefilledSubject, message: "" });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    setTimeout(() => {
-      setIsSubmitting(false);
+    setErrorMessage("");
+
+    try {
+      const response = await fetch("https://formsubmit.co/ajax/atin86015@gmail.com", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          _subject: formData.subject ? `[Portfolio] ${formData.subject}` : `New Portfolio Inquiry from ${formData.name}`,
+          message: formData.message,
+          _template: "table",
+        }),
+      });
+
+      if (response.ok) {
+        setIsSubmitted(true);
+        confetti({
+          particleCount: 100,
+          spread: 70,
+          origin: { y: 0.6 },
+          colors: ["#3B82F6", "#60A5FA", "#93C5FD"],
+        });
+        setFormData({ name: "", email: "", subject: "", message: "" });
+        setTimeout(() => setIsSubmitted(false), 6000);
+      } else {
+        throw new Error("API submit error");
+      }
+    } catch (err) {
+      console.warn("FormSubmit fetch error, launching mailto fallback", err);
+      const mailtoUrl = `mailto:atin86015@gmail.com?subject=${encodeURIComponent(
+        formData.subject || "Portfolio Contact Message"
+      )}&body=${encodeURIComponent(
+        `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
+      )}`;
+      window.open(mailtoUrl, "_blank");
       setIsSubmitted(true);
-      confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 }, colors: ["#3B82F6", "#60A5FA", "#93C5FD"] });
       setFormData({ name: "", email: "", subject: "", message: "" });
-      setTimeout(() => setIsSubmitted(false), 5000);
-    }, 1200);
+      setTimeout(() => setIsSubmitted(false), 6000);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -64,7 +104,7 @@ export default function ContactSection({ prefilledSubject = "" }: ContactSection
               <div className="relative w-16 h-16 flex-shrink-0">
                 <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-blue-600 to-sky-400 p-[2px] shadow-[0_0_20px_rgba(59,130,246,0.4)]">
                   <div className="relative w-full h-full rounded-2xl overflow-hidden bg-[#111827]">
-                    <Image src="/profile.jpeg" alt="Atin Sharma" fill sizes="64px" className="object-cover object-top" />
+                    <Image src={getImagePath("/profile.jpeg")} alt="Atin Sharma" fill sizes="64px" className="object-cover object-top" />
                   </div>
                 </div>
               </div>
@@ -91,13 +131,33 @@ export default function ContactSection({ prefilledSubject = "" }: ContactSection
               </a>
 
               <a href="tel:+917905539159" className="flex items-center gap-4 p-4 rounded-2xl bg-[#0d1626] border border-white/5 hover:border-blue-500/40 transition-colors group">
-                <div className="p-2.5 rounded-xl bg-emerald-500/15 text-emerald-400 group-hover:scale-110 transition-transform">
+                <div className="p-2.5 rounded-xl bg-blue-500/15 text-blue-400 group-hover:scale-110 transition-transform">
                   <Phone className="w-5 h-5" />
                 </div>
                 <div>
                   <div className="text-[10px] font-mono text-slate-400 uppercase">Phone</div>
                   <div className="text-sm font-semibold text-white">+91 79055 39159</div>
                 </div>
+              </a>
+
+              <a
+                href="https://wa.me/917905539159?text=Hi%20Atin%2C%20I%20saw%20your%20portfolio%20and%20would%20like%20to%20connect%21"
+                target="_blank"
+                rel="noreferrer"
+                className="flex items-center justify-between p-4 rounded-2xl bg-[#0d1626] border border-emerald-500/20 hover:border-emerald-500/50 hover:bg-emerald-950/20 transition-all group"
+              >
+                <div className="flex items-center gap-4">
+                  <div className="p-2.5 rounded-xl bg-emerald-500/15 text-emerald-400 group-hover:scale-110 transition-transform">
+                    <FaWhatsapp className="w-5 h-5 text-[#25D366]" />
+                  </div>
+                  <div>
+                    <div className="text-[10px] font-mono text-slate-400 uppercase">WhatsApp</div>
+                    <div className="text-sm font-semibold text-white">+91 79055 39159</div>
+                  </div>
+                </div>
+                <span className="text-xs font-semibold px-3 py-1 rounded-full bg-[#25D366]/20 text-[#25D366] group-hover:bg-[#25D366] group-hover:text-slate-950 transition-all flex items-center gap-1">
+                  Chat <ExternalLink className="w-3 h-3" />
+                </span>
               </a>
 
               <div className="flex items-center gap-4 p-4 rounded-2xl bg-[#0d1626] border border-white/5">
@@ -113,15 +173,19 @@ export default function ContactSection({ prefilledSubject = "" }: ContactSection
 
             {/* Social Links */}
             <div>
-              <p className="text-xs font-mono text-slate-400 uppercase tracking-widest mb-3">Follow Me</p>
-              <div className="flex gap-3">
+              <p className="text-xs font-mono text-slate-400 uppercase tracking-widest mb-3">Follow & Chat</p>
+              <div className="grid grid-cols-3 gap-3">
                 <a href="https://github.com/atin860" target="_blank" rel="noreferrer"
-                  className="flex-1 py-2.5 rounded-xl glass-card flex items-center justify-center gap-2 text-xs font-semibold text-slate-300 hover:text-white border-white/10 hover:border-blue-500/40 transition-all">
+                  className="py-2.5 rounded-xl glass-card flex items-center justify-center gap-2 text-xs font-semibold text-slate-300 hover:text-white border-white/10 hover:border-blue-500/40 transition-all">
                   <FaGithub className="w-4 h-4 text-blue-400" /> GitHub
                 </a>
                 <a href="https://www.linkedin.com/in/atin-sharma-579a10295/" target="_blank" rel="noreferrer"
-                  className="flex-1 py-2.5 rounded-xl glass-card flex items-center justify-center gap-2 text-xs font-semibold text-slate-300 hover:text-white border-white/10 hover:border-blue-500/40 transition-all">
+                  className="py-2.5 rounded-xl glass-card flex items-center justify-center gap-2 text-xs font-semibold text-slate-300 hover:text-white border-white/10 hover:border-blue-500/40 transition-all">
                   <FaLinkedin className="w-4 h-4 text-blue-400" /> LinkedIn
+                </a>
+                <a href="https://wa.me/917905539159?text=Hi%20Atin%2C%20I%20saw%20your%20portfolio%20and%20would%20like%20to%20connect%21" target="_blank" rel="noreferrer"
+                  className="py-2.5 rounded-xl glass-card flex items-center justify-center gap-2 text-xs font-semibold text-slate-300 hover:text-white border-white/10 hover:border-emerald-500/40 transition-all">
+                  <FaWhatsapp className="w-4 h-4 text-[#25D366]" /> WhatsApp
                 </a>
               </div>
             </div>

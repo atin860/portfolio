@@ -1,7 +1,7 @@
 "use client";
 
 import { Code2, ArrowUp } from "lucide-react";
-import { FaGithub, FaLinkedin } from "react-icons/fa";
+import { FaGithub, FaLinkedin, FaWhatsapp } from "react-icons/fa";
 import { Mail } from "lucide-react";
 
 export default function Footer() {
@@ -46,10 +46,11 @@ export default function Footer() {
                 {[
                   { icon: FaGithub, href: "https://github.com/atin860", label: "GitHub" },
                   { icon: FaLinkedin, href: "https://www.linkedin.com/in/atin-sharma-579a10295/", label: "LinkedIn" },
+                  { icon: FaWhatsapp, href: "https://wa.me/917905539159?text=Hi%20Atin%2C%20I%20saw%20your%20portfolio%20and%20would%20like%20to%20connect%21", label: "WhatsApp" },
                   { icon: Mail, href: "mailto:atin86015@gmail.com", label: "Email" },
                 ].map((s) => (
                   <a key={s.label} href={s.href} target="_blank" rel="noreferrer"
-                    className="p-2.5 glass-card rounded-xl text-slate-400 hover:text-blue-400 border-white/10 hover:border-blue-500/40 transition-all"
+                    className="p-2.5 glass-card rounded-xl text-slate-400 hover:text-emerald-400 border-white/10 hover:border-emerald-500/40 transition-all"
                     aria-label={s.label}>
                     <s.icon className="w-4 h-4" />
                   </a>

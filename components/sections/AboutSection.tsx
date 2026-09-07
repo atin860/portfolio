@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { getImagePath } from "@/lib/utils";
 import { Briefcase, GraduationCap, Sparkles, CheckCircle, Zap, Globe } from "lucide-react";
 
 const fadeUp = {
@@ -61,7 +62,7 @@ export default function AboutSection() {
               <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-blue-600 to-sky-400 p-[2px] shadow-[0_0_30px_rgba(59,130,246,0.4)]">
                 <div className="relative w-full h-full rounded-2xl overflow-hidden bg-[#111827]">
                   <Image
-                    src="/profile2.jpeg"
+                    src={getImagePath("/profile2.jpeg")}
                     alt="Atin Sharma"
                     fill
                     sizes="(max-width:640px) 160px, 192px"

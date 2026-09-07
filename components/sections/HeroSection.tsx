@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
+import { getImagePath } from "@/lib/utils";
 import {
   ArrowRight,
   Download,
@@ -11,7 +12,7 @@ import {
   Mail,
   ChevronDown,
 } from "lucide-react";
-import { FaGithub, FaLinkedin, FaGooglePlay, FaApple } from "react-icons/fa";
+import { FaGithub, FaLinkedin, FaWhatsapp, FaGooglePlay, FaApple } from "react-icons/fa";
 
 interface HeroSectionProps {
   onOpenResumeModal: () => void;
@@ -113,9 +114,14 @@ export default function HeroSection({
             <span className="flex items-center gap-1.5 px-3 py-1.5 glass-card rounded-lg border-white/10">
               <MapPin className="w-3.5 h-3.5 text-blue-400" /> Lucknow, UP, India
             </span>
-            <span className="flex items-center gap-1.5 px-3 py-1.5 glass-card rounded-lg border-white/10">
-              <Phone className="w-3.5 h-3.5 text-emerald-400" /> +91 79055 39159
-            </span>
+            <a
+              href="https://wa.me/917905539159?text=Hi%20Atin%2C%20I%20saw%20your%20portfolio%20and%20would%20like%20to%20connect%21"
+              target="_blank"
+              rel="noreferrer"
+              className="flex items-center gap-1.5 px-3 py-1.5 glass-card rounded-lg border-emerald-500/30 text-emerald-400 hover:border-emerald-500/60 hover:bg-emerald-950/20 transition-all font-semibold"
+            >
+              <FaWhatsapp className="w-3.5 h-3.5 text-[#25D366]" /> +91 79055 39159
+            </a>
             <a
               href="mailto:atin86015@gmail.com"
               className="flex items-center gap-1.5 px-3 py-1.5 glass-card rounded-lg border-white/10 hover:border-blue-500/40 transition-colors"
@@ -164,6 +170,15 @@ export default function HeroSection({
                 aria-label="LinkedIn"
               >
                 <FaLinkedin className="w-4 h-4" />
+              </a>
+              <a
+                href="https://wa.me/917905539159?text=Hi%20Atin%2C%20I%20saw%20your%20portfolio%20and%20would%20like%20to%20connect%21"
+                target="_blank"
+                rel="noreferrer"
+                className="p-2.5 glass-card rounded-xl text-slate-400 hover:text-emerald-400 hover:border-emerald-500/40 transition-all hover:scale-110"
+                aria-label="WhatsApp"
+              >
+                <FaWhatsapp className="w-4 h-4 text-[#25D366]" />
               </a>
             </div>
 
@@ -223,7 +238,7 @@ export default function HeroSection({
             <div className="absolute inset-0 rounded-full bg-gradient-to-br from-blue-600 via-sky-500 to-blue-400 p-[3px] shadow-[0_0_50px_rgba(59,130,246,0.5)]">
               <div className="relative w-full h-full rounded-full overflow-hidden bg-[#111827]">
                 <Image
-                  src="/profile.jpeg"
+                  src={getImagePath("/profile.jpeg")}
                   alt="Atin Sharma – Flutter Developer"
                   fill
                   priority
