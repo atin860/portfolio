@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import Preloader from "@/components/Preloader";
 import Navbar from "@/components/Navbar";
 import FloatingCTA from "@/components/FloatingCTA";
 import HeroSection from "@/components/sections/HeroSection";
@@ -17,7 +16,6 @@ import ProjectModal from "@/components/ProjectModal";
 import ResumeModal from "@/components/ResumeModal";
 
 export default function Home() {
-  const [isLoading, setIsLoading] = useState(true);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [isResumeModalOpen, setIsResumeModalOpen] = useState(false);
   const [contactSubject, setContactSubject] = useState("");
@@ -29,8 +27,6 @@ export default function Home() {
 
   return (
     <>
-      {isLoading && <Preloader onComplete={() => setIsLoading(false)} />}
-
       <Navbar
         onOpenResumeModal={() => setIsResumeModalOpen(true)}
         onOpenContactModal={() => handleOpenContact()}
