@@ -1,11 +1,8 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Preloader from "@/components/Preloader";
 import Navbar from "@/components/Navbar";
-import CustomCursor from "@/components/CustomCursor";
-import ParticleCanvas from "@/components/ParticleCanvas";
-import ScrollProgress from "@/components/ScrollProgress";
 import FloatingCTA from "@/components/FloatingCTA";
 import HeroSection from "@/components/sections/HeroSection";
 import AboutSection from "@/components/sections/AboutSection";
@@ -25,23 +22,15 @@ export default function Home() {
   const [isResumeModalOpen, setIsResumeModalOpen] = useState(false);
   const [contactSubject, setContactSubject] = useState("");
 
-  useEffect(() => {
-    const timer = setTimeout(() => setIsLoading(false), 2000);
-    return () => clearTimeout(timer);
-  }, []);
-
   const handleOpenContact = (subject?: string) => {
     setContactSubject(subject || "");
     document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
   };
 
-  if (isLoading) return <Preloader />;
-
   return (
     <>
-      <CustomCursor />
-      <ScrollProgress />
-      <ParticleCanvas />
+      {isLoading && <Preloader onComplete={() => setIsLoading(false)} />}
+
       <Navbar
         onOpenResumeModal={() => setIsResumeModalOpen(true)}
         onOpenContactModal={() => handleOpenContact()}

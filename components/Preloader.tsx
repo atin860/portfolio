@@ -10,6 +10,8 @@ export default function Preloader({ onComplete }: { onComplete?: () => void }) {
   const [isFinished, setIsFinished] = useState(false);
 
   useEffect(() => {
+    document.body.style.overflow = "hidden";
+
     const textSequence = [
       { threshold: 10, text: "Initializing Flutter 3.x Engine..." },
       { threshold: 35, text: "Compiling Dart Bytecode & Widgets..." },
@@ -23,6 +25,7 @@ export default function Preloader({ onComplete }: { onComplete?: () => void }) {
         if (prev >= 100) {
           clearInterval(timer);
           setTimeout(() => {
+            document.body.style.overflow = "";
             setIsFinished(true);
             if (onComplete) onComplete();
           }, 300);
@@ -39,7 +42,10 @@ export default function Preloader({ onComplete }: { onComplete?: () => void }) {
       });
     }, 35);
 
-    return () => clearInterval(timer);
+    return () => {
+      document.body.style.overflow = "";
+      clearInterval(timer);
+    };
   }, [onComplete]);
 
   return (

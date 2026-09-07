@@ -142,8 +142,33 @@ const filters = [
   { id: "fullstack", name: "Full-Stack" },
 ];
 
+function ProjectCardImage({ src, alt, accentColor }: { src: string; alt: string; accentColor: string }) {
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  return (
+    <div className="relative h-36 sm:h-40 overflow-hidden bg-[#111827]">
+      {!isLoaded && (
+        <div className="absolute inset-0 bg-[#0d1626] animate-pulse flex items-center justify-center">
+          <div className="w-5 h-5 border-2 border-blue-500/30 border-t-blue-500 rounded-full animate-spin" />
+        </div>
+      )}
+      <img
+        src={src}
+        alt={alt}
+        onLoad={() => setIsLoaded(true)}
+        loading="lazy"
+        className={`w-full h-full object-cover group-hover:scale-105 transition-all duration-500 ${
+          isLoaded ? "opacity-75 group-hover:opacity-95" : "opacity-0"
+        }`}
+      />
+      <div className={`absolute inset-0 bg-gradient-to-t ${accentColor} mix-blend-overlay pointer-events-none`} />
+      <div className="absolute inset-0 bg-gradient-to-t from-[#111827] via-transparent to-transparent pointer-events-none" />
+    </div>
+  );
+}
+
 export default function ProjectsSection({ onSelectProject }: ProjectsSectionProps) {
-  const [activeFilter, setActiveFilter] = useState("all");
+  const [activeFilter, setActiveFilter] = useState<string>("all");
 
   const filtered = activeFilter === "all" ? projects : projects.filter((p) => p.category === activeFilter);
 
@@ -193,17 +218,15 @@ export default function ProjectsSection({ onSelectProject }: ProjectsSectionProp
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.08 }}
-              className="glass-card glass-card-hover rounded-3xl border-white/10 overflow-hidden flex flex-col group"
+              className="glass-card glass-card-hover rounded-3xl border-white/10 overflow-hidden flex flex-col group relative"
             >
               {/* Image */}
-              <div className="relative h-36 sm:h-40 overflow-hidden bg-[#111827]">
-                <img
+              <div className="relative">
+                <ProjectCardImage
                   src={getImagePath(project.image)}
                   alt={project.title}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-75 group-hover:opacity-95"
+                  accentColor={project.accentColor}
                 />
-                <div className={`absolute inset-0 bg-gradient-to-t ${project.accentColor} mix-blend-overlay`} />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#111827] via-transparent to-transparent" />
 
                 {/* View Overlay */}
                 <button

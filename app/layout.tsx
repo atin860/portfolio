@@ -45,6 +45,8 @@ export const metadata: Metadata = {
   },
 };
 
+import { getImagePath } from "@/lib/utils";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -52,6 +54,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning className={`${poppins.variable} ${sora.variable} h-full antialiased scroll-smooth`}>
+      <head>
+        <link rel="preload" as="image" href={getImagePath("/profile.jpeg")} />
+      </head>
       <body suppressHydrationWarning className="min-h-full bg-[#0B1120] text-slate-100 flex flex-col font-sans selection:bg-blue-500/30 selection:text-blue-200">
         <LenisProvider>
           <ScrollProgress />

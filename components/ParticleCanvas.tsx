@@ -28,7 +28,8 @@ export default function ParticleCanvas() {
     const colors = ["#3B82F6", "#60A5FA", "#93C5FD", "#2563EB"];
 
     const particles: Particle[] = [];
-    const particleCount = Math.min(Math.floor((width * height) / 20000), 55);
+    const isMobile = width < 768;
+    const particleCount = isMobile ? 18 : Math.min(Math.floor((width * height) / 20000), 55);
 
     for (let i = 0; i < particleCount; i++) {
       particles.push({
