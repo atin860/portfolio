@@ -2,7 +2,8 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Download, Sparkles, Menu, X, Code2 } from "lucide-react";
+import { Download, Sparkles, Menu, X } from "lucide-react";
+import Logo from "@/components/Logo";
 
 interface NavbarProps {
   onOpenResumeModal: () => void;
@@ -65,11 +66,7 @@ export default function Navbar({
           href="#home"
           className="flex items-center space-x-3 group cursor-pointer"
         >
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 to-sky-400 p-[1px] shadow-[0_0_15px_rgba(59,130,246,0.4)] group-hover:scale-105 transition-transform duration-300">
-            <div className="w-full h-full bg-[#0B1120] rounded-[11px] flex items-center justify-center">
-              <Code2 className="w-5 h-5 text-blue-400 group-hover:rotate-12 transition-transform duration-300" />
-            </div>
-          </div>
+          <Logo size={42} animated className="group-hover:scale-105 transition-transform duration-300 shadow-[0_0_20px_rgba(59,130,246,0.35)]" />
           <div className="flex flex-col">
             <span className="text-lg font-bold font-sora tracking-tight text-white group-hover:text-blue-400 transition-colors">
               ATIN <span className="text-blue-500">SHARMA</span>

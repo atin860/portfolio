@@ -2,7 +2,8 @@
 
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Smartphone, Code2, Cpu } from "lucide-react";
+import { Cpu } from "lucide-react";
+import Logo from "@/components/Logo";
 
 export default function Preloader({ onComplete }: { onComplete?: () => void }) {
   const [progress, setProgress] = useState(0);
@@ -68,10 +69,9 @@ export default function Preloader({ onComplete }: { onComplete?: () => void }) {
               initial={{ scale: 0, rotate: -180 }}
               animate={{ scale: 1, rotate: 0 }}
               transition={{ duration: 0.8, ease: "backOut" }}
-              className="w-20 h-20 rounded-2xl glass-card flex items-center justify-center mb-8 border border-blue-500/30 shadow-[0_0_30px_rgba(59,130,246,0.35)] relative"
+              className="mb-8"
             >
-              <Smartphone className="w-10 h-10 text-blue-400 animate-pulse" />
-              <Code2 className="w-5 h-5 text-sky-300 absolute bottom-3 right-3" />
+              <Logo size={84} className="shadow-[0_0_35px_rgba(59,130,246,0.4)]" />
             </motion.div>
 
             {/* Developer Tag */}
