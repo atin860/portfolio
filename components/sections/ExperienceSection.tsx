@@ -37,7 +37,7 @@ export default function ExperienceSection() {
   ];
 
   return (
-    <section id="experience" className="pt-8 pb-12 relative overflow-hidden bg-[#0d1626]/40">
+    <section id="experience" className="py-24 relative overflow-hidden bg-[#0d1626]/40">
       <div className="absolute bottom-0 left-0 w-96 h-96 bg-blue-700/10 rounded-full blur-[130px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">

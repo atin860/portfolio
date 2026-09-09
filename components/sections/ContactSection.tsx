@@ -71,7 +71,7 @@ export default function ContactSection({ prefilledSubject = "" }: ContactSection
   };
 
   return (
-    <section id="contact" className="pt-8 pb-12 relative overflow-hidden bg-[#0d1626]/40">
+    <section id="contact" className="py-24 relative overflow-hidden bg-[#0d1626]/40">
       <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-700/12 rounded-full blur-[140px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">

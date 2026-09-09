@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { ExternalLink, CheckCircle, Eye, Globe, Sparkles } from "lucide-react";
 import { FaGithub, FaGooglePlay, FaApple } from "react-icons/fa";
@@ -63,29 +63,6 @@ const projects: Project[] = [
     github: "https://github.com/atin860",
     badgeText: "Production Live",
     accentColor: "from-blue-500/20 to-sky-600/20",
-  },
-  {
-    id: "bjl-order",
-    title: "BJL Order",
-    subtitle: "Jewellery Ordering App",
-    period: "2024 – Present",
-    techStack: ["Flutter", "Dart", "Order Management", "REST APIs", "Mobile App"],
-    category: "mobile",
-    description: "BJL Order is a Flutter mobile application developed for Bacche Lal Jewellers Pvt. Ltd. Customers can browse their jewellery collection and place orders through the app. Customer orders are then received and managed through the business/order management system.",
-    features: [
-      "Jewellery Collection Browsing",
-      "Customer Order Placement",
-      "Business Order Management System",
-      "Real-Time Order Sync",
-      "Flutter Mobile Architecture"
-    ],
-    image: "/project-bjl-order.png",
-    screenshots: ["/project-bjl-order.png"],
-    liveDemo: "https://play.google.com/store/apps/details?id=com.bjl_jewels.vsafe&pcampaignid=web_share",
-    playStoreUrl: "https://play.google.com/store/apps/details?id=com.bjl_jewels.vsafe&pcampaignid=web_share",
-    github: "https://github.com/atin860",
-    badgeText: "Play Store Live",
-    accentColor: "from-amber-500/20 to-yellow-600/20",
   },
   {
     id: "verkaufalles",
@@ -167,13 +144,6 @@ const filters = [
 
 function ProjectCardImage({ src, alt, accentColor }: { src: string; alt: string; accentColor: string }) {
   const [isLoaded, setIsLoaded] = useState(false);
-  const imgRef = useRef<HTMLImageElement>(null);
-
-  useEffect(() => {
-    if (imgRef.current && imgRef.current.complete && imgRef.current.naturalWidth !== 0) {
-      setIsLoaded(true);
-    }
-  }, [src]);
 
   return (
     <div className="relative h-36 sm:h-40 overflow-hidden bg-[#111827]">
@@ -183,13 +153,13 @@ function ProjectCardImage({ src, alt, accentColor }: { src: string; alt: string;
         </div>
       )}
       <img
-        ref={imgRef}
         src={src}
         alt={alt}
         onLoad={() => setIsLoaded(true)}
-        onError={() => setIsLoaded(true)}
-        className={`w-full h-full object-cover group-hover:scale-105 transition-all duration-500 ${isLoaded ? "opacity-75 group-hover:opacity-95" : "opacity-0"
-          }`}
+        loading="lazy"
+        className={`w-full h-full object-cover group-hover:scale-105 transition-all duration-500 ${
+          isLoaded ? "opacity-75 group-hover:opacity-95" : "opacity-0"
+        }`}
       />
       <div className={`absolute inset-0 bg-gradient-to-t ${accentColor} mix-blend-overlay pointer-events-none`} />
       <div className="absolute inset-0 bg-gradient-to-t from-[#111827] via-transparent to-transparent pointer-events-none" />
@@ -203,7 +173,7 @@ export default function ProjectsSection({ onSelectProject }: ProjectsSectionProp
   const filtered = activeFilter === "all" ? projects : projects.filter((p) => p.category === activeFilter);
 
   return (
-    <section id="projects" className="pt-8 pb-12 relative overflow-hidden">
+    <section id="projects" className="py-24 relative overflow-hidden">
       <div className="absolute top-20 right-0 w-96 h-96 bg-blue-700/10 rounded-full blur-[130px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">

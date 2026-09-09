@@ -105,7 +105,7 @@ export default function SkillsSection() {
   const filtered = active === "all" ? skills : skills.filter((s) => s.category === active);
 
   return (
-    <section id="skills" className="pt-8 pb-12 relative overflow-hidden bg-[#0d1626]/40">
+    <section id="skills" className="py-24 relative overflow-hidden bg-[#0d1626]/40">
       <div className="absolute top-0 right-1/3 w-80 h-80 bg-blue-700/10 rounded-full blur-[120px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">

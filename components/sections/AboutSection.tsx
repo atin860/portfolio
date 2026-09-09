@@ -23,7 +23,7 @@ export default function AboutSection() {
   ];
 
   return (
-    <section id="about" className="pt-8 pb-12 relative overflow-hidden">
+    <section id="about" className="py-24 relative overflow-hidden">
       {/* Blue gradient blob */}
       <div className="absolute top-0 right-0 w-80 h-80 bg-blue-700/10 rounded-full blur-[120px] pointer-events-none" />
 

@@ -19,7 +19,6 @@ const sora = Sora({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"),
   title: "Atin Sharma | Flutter Developer & Product Builder Portfolio",
   description:
     "Official Portfolio of Atin Sharma, Flutter Developer & Product Builder with 3+ years experience building cross-platform Android, iOS, and Web applications.",
@@ -56,7 +55,6 @@ export const metadata: Metadata = {
 };
 
 import { getImagePath } from "@/lib/utils";
-import AppShell from "@/components/AppShell";
 
 export default function RootLayout({
   children,
@@ -73,9 +71,7 @@ export default function RootLayout({
           <ScrollProgress />
           <CustomCursor />
           <ParticleCanvas />
-          <AppShell>
-            <div className="relative z-10 flex-1 flex flex-col">{children}</div>
-          </AppShell>
+          <div className="relative z-10 flex-1 flex flex-col">{children}</div>
         </LenisProvider>
       </body>
     </html>

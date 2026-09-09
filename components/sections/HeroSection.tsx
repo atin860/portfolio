@@ -53,7 +53,7 @@ export default function HeroSection({
   return (
     <section
       id="home"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16 pb-8"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden pt-24 pb-16"
     >
       {/* Background Gradient Blobs */}
       <div className="absolute top-20 left-0 w-[500px] h-[500px] bg-blue-700/15 rounded-full blur-[140px] pointer-events-none" />
