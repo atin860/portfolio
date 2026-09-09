@@ -63,7 +63,7 @@ const services = [
 
 export default function ServicesSection({ onOpenContactModal }: ServicesSectionProps) {
   return (
-    <section id="services" className="py-24 relative overflow-hidden bg-[#0d1626]/40">
+    <section id="services" className="pt-8 pb-12 relative overflow-hidden bg-[#0d1626]/40">
       <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-blue-700/10 rounded-full blur-[120px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">

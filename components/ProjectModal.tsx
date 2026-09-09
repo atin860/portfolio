@@ -106,14 +106,18 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
               )}
             </div>
             <div className="flex gap-3">
-              <a href={project.github} target="_blank" rel="noreferrer"
-                className="flex items-center gap-2 px-4 py-2 glass-card rounded-xl text-slate-300 hover:text-white text-xs font-semibold">
-                <FaGithub className="w-4 h-4 text-blue-400" /> GitHub
-              </a>
-              <a href={project.liveDemo} target="_blank" rel="noreferrer"
-                className="flex items-center gap-2 px-5 py-2 rounded-xl bg-gradient-to-r from-blue-600 to-sky-500 text-white text-xs font-bold font-sora shadow-lg">
-                <Globe className="w-4 h-4" /> Live Demo <ExternalLink className="w-3 h-3" />
-              </a>
+              {project.github && (
+                <a href={project.github} target="_blank" rel="noreferrer"
+                  className="flex items-center gap-2 px-4 py-2 glass-card rounded-xl text-slate-300 hover:text-white text-xs font-semibold">
+                  <FaGithub className="w-4 h-4 text-blue-400" /> GitHub
+                </a>
+              )}
+              {project.liveDemo && (
+                <a href={project.liveDemo} target="_blank" rel="noreferrer"
+                  className="flex items-center gap-2 px-5 py-2 rounded-xl bg-gradient-to-r from-blue-600 to-sky-500 text-white text-xs font-bold font-sora shadow-lg">
+                  <Globe className="w-4 h-4" /> Live Demo <ExternalLink className="w-3 h-3" />
+                </a>
+              )}
             </div>
           </div>
         </motion.div>
