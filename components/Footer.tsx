@@ -1,8 +1,8 @@
 "use client";
 
-import { Code2, ArrowUp } from "lucide-react";
+import { ArrowUp, Mail } from "lucide-react";
 import { FaGithub, FaLinkedin, FaWhatsapp } from "react-icons/fa";
-import { Mail } from "lucide-react";
+import Logo from "@/components/Logo";
 
 export default function Footer() {
   return (
@@ -11,13 +11,9 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 pb-10 border-b border-white/8">
           {/* Brand */}
           <div className="space-y-4">
-            <a href="#home" className="flex items-center gap-3">
-              <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-blue-600 to-sky-400 p-[1px]">
-                <div className="w-full h-full bg-[#0B1120] rounded-[11px] flex items-center justify-center">
-                  <Code2 className="w-4 h-4 text-blue-400" />
-                </div>
-              </div>
-              <span className="text-lg font-bold font-sora text-white">
+            <a href="#home" className="flex items-center gap-3 group">
+              <Logo size={36} animated className="group-hover:scale-105 transition-transform duration-300" />
+              <span className="text-lg font-bold font-sora text-white group-hover:text-blue-400 transition-colors">
                 ATIN <span className="text-blue-400">SHARMA</span>
               </span>
             </a>
